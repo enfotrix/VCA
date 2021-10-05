@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1095176343993",
+    "project_id": "virtual-ca-541f4",
+    "storage_bucket": "virtual-ca-541f4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1095176343993:android:7ef904f6633b14388d2668",
+        "android_client_info": {
+          "package_name": "com.devdiv.vca"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1095176343993-2h8b0qe3v8vbu33jil5kk6u7bgjf7dh2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBoFrDIs5DnRGoSmqT9cbTb6w0z5cc9u04"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1095176343993-2h8b0qe3v8vbu33jil5kk6u7bgjf7dh2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

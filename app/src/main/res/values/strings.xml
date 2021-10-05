@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">VCA</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="sign_up_later"><u>Sign Up Later</u></string>
+    <string name="login_later"><u>LogIn Later</u></string>
+    <string name="forget_password"><u>Forget Password ?</u></string>
+    <string name="resend_otp_again"><u>RESEND OTP</u></string>
+</resources>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#75F675"
+    tools:context=".Activities.ActivityLogin">
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/cricimg"
+        android:layout_width="@dimen/_70sdp"
+        android:layout_height="@dimen/_70sdp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:src="@drawable/cricpng" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/cricimg"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:background="@drawable/activitylogin_bg">
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tablayout"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:background="@drawable/activitylogin_bg"
+            app:tabGravity="fill"
+            app:tabSelectedTextColor="@color/green"
+            app:tabIndicatorColor="@color/green"
+            app:tabIndicatorHeight="@dimen/_1sdp"
+            app:tabMode="fixed"
+            app:tabTextColor="@color/black" />
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/tablayout" />
+
+    </RelativeLayout>
+
+</RelativeLayout>
