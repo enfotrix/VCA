@@ -264,6 +264,7 @@ public class ActivityOtp extends AppCompatActivity implements View.OnClickListen
         map.put("country", country);
         map.put("number", uNMBR);
         map.put("password", uPassword);
+        map.put("user_picture", "");
 
         documentReference.set(map).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override

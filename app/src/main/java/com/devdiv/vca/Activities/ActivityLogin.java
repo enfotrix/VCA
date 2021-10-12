@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import com.devdiv.vca.Adapters.TabVPAdapter;
-import com.devdiv.vca.Fragment.SignUPFragment;
 import com.devdiv.vca.R;
 import com.google.android.material.tabs.TabLayout;
 

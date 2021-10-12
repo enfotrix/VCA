@@ -1,6 +1,7 @@
 package com.devdiv.vca.Fragment;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
@@ -22,18 +24,26 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.devdiv.vca.Activities.ActivityMySquad;
+import com.devdiv.vca.Activities.ActivityPredictedPlayer;
 import com.devdiv.vca.GetWeather.WeatherCondition;
+import com.devdiv.vca.LottieDialog;
 import com.devdiv.vca.R;
 import com.google.android.material.textfield.TextInputLayout;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Fragment_Predict extends Fragment {
 
@@ -43,13 +53,14 @@ public class Fragment_Predict extends Fragment {
     AutoCompleteTextView autoCompletetxtcountry, autoCompletetxtStadium,
             autoCompletetxtpitch, autoCompletetxtteam;
     ArrayList<String> stadium;
-    TextView tvSelectedDate, datee, txt_weatherResult;
+    TextView tvSelectedDate, datee, txt_weatherResult, txt_mysquad;
     ImageView imgCalender;
     Calendar myCalendar;
     CardView card;
     private String fromatedate;
     private String checkstadium;
     WeatherCondition weatherCondition;
+    AppCompatButton btn_predict;
 
 
     @Override
@@ -63,9 +74,26 @@ public class Fragment_Predict extends Fragment {
         getweatherbycity();
 
         getplayer();
+        postDataUsingVolley();
+//        getsquad();
+
+        btn_predict.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), ActivityPredictedPlayer.class));
+            }
+        });
 
         myCalendar = Calendar.getInstance();
         weatherCondition = new WeatherCondition(getContext());
+
+        ////////////////// my squad////////////////////
+        txt_mysquad.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getContext(), ActivityMySquad.class));
+            }
+        });
 
         String[] countryarray = {"Pakistan", "India", "England", "Australia", "New Zealand", "South Africa"};
         ArrayAdapter arrayAdapter = new ArrayAdapter(getContext(), R.layout.dropdown_list, countryarray);
@@ -116,6 +144,7 @@ public class Fragment_Predict extends Fragment {
         String URL = "https://misri.pythonanywhere.com/player";
         RequestQueue requestQueue = Volley.newRequestQueue(getContext());
         JSONObject postData = new JSONObject();
+
         try {
             postData.put("uname", "hassan");
             postData.put("pass", "data");
@@ -127,24 +156,6 @@ public class Fragment_Predict extends Fragment {
             @Override
             public void onResponse(JSONObject response) {
                 Toast.makeText(getContext(), "" + response.toString(), Toast.LENGTH_SHORT).show();
-
-//                for (Iterator<String> it = response.keys(); it.hasNext(); ) {
-//                    String key = it.next();
-//                    JSONObject entry = null;
-//                    try {
-//
-//                        entry = response.getJSONObject(key);
-//                        Log.d("TAG", entry.toString());
-//
-//                        JSONObject phone = entry.getJSONObject("Inzamam-ul-Haq");
-//                        Toast.makeText(getContext(), "" + phone.get("HS"), Toast.LENGTH_SHORT).show();
-//
-//
-//                    } catch (JSONException e) {
-//                        e.printStackTrace();
-//                    }
-//
-//                }
 
                 JSONObject playerName = null;
                 try {
@@ -164,7 +175,7 @@ public class Fragment_Predict extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
 
-                Toast.makeText(getContext(), "" + error, Toast.LENGTH_SHORT).show();
+                // Toast.makeText(getContext(), "" + error, Toast.LENGTH_SHORT).show();
 
             }
         });
@@ -172,6 +183,119 @@ public class Fragment_Predict extends Fragment {
         requestQueue.add(jsonObjectRequest);
 //        MySingleton.getInstance(getContext()).addToRequestQueue(jsonObjectRequest);
 
+    }
+
+    private void getsquad() {
+
+        String URL = "https://misri.pythonanywhere.com/player";
+
+        RequestQueue queue = Volley.newRequestQueue(getContext());
+
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET,
+                URL, null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+
+//                        Toast.makeText(getContext(), "" + response, Toast.LENGTH_SHORT).show();
+
+                        for (int i = 0; i < response.length(); i++) {
+
+                            try {
+
+                                Toast.makeText(getContext(), "" + response.getString(i), Toast.LENGTH_SHORT).show();
+
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+
+        queue.add(jsonArrayRequest);
+
+    }
+
+    private void postDataUsingVolley() {
+        // url to post our data
+        String URL = "https://misri.pythonanywhere.com/player";
+
+        // creating a new variable for our request queue
+        RequestQueue queue = Volley.newRequestQueue(getContext());
+
+        // on below line we are calling a string
+        // request method to post the data to our API
+        // in this we are calling a post method.
+        StringRequest request = new StringRequest(Request.Method.POST, URL, new com.android.volley.Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                // inside on response method we are
+                // hiding our progress bar
+                // and setting data to edit text as empty
+
+                // on below line we are displaying a success toast message.
+//                Toast.makeText(getContext(), "Data added to API" + response.toString(), Toast.LENGTH_SHORT).show();
+                try {
+                    // on below line we are passing our response
+                    // to json object to extract data from it.
+                    JSONObject playername = new JSONObject(response);
+
+                    JSONObject player = playername.getJSONObject("KC Sangakkara");
+                    // below are the strings which we
+                    // extract from our json object.
+
+                    String name = player.getString("Player");
+                    String job = player.getString("Runs");
+                    String century = player.getString("100");
+                    String fifty = player.getString("50");
+                    Toast.makeText(getContext(), name + "\n" +
+                            job + "\n" +
+                            century + "\n" +
+                            fifty, Toast.LENGTH_SHORT).show();
+
+                    // on below line we are setting this string s to our text view.
+//                    responseTV.setText("Name : " + name + "\n" + "Job : " + job);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new com.android.volley.Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                // method to handle errors.
+                Toast.makeText(getContext(), "Fail to get response = " + error, Toast.LENGTH_SHORT).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                // below line we are creating a map for
+                // storing our values in key and value pair.
+                Map<String, String> params = new HashMap<String, String>();
+
+                // on below line we are passing our key
+                // and value pair to our parameters.
+                params.put("team", "paksitan");
+                params.put("pitch", "dusty");
+                params.put("weather", "clear");
+                params.put("ground", "lahore");
+                params.put("oteam", "India");
+
+                // at last we are
+                // returning our params.
+                return params;
+            }
+        };
+        // below line is to make
+        // a json object request.
+        queue.add(request);
     }
 
     private void getweatherbycity() {
@@ -299,11 +423,16 @@ public class Fragment_Predict extends Fragment {
         autoCompletetxtpitch = view.findViewById(R.id.autoCompletetxtpitch);
         txtLay_pitch = view.findViewById(R.id.txtLay_pitch);
         autoCompletetxtteam = view.findViewById(R.id.autoCompletetxtteam);
+        txt_mysquad = view.findViewById(R.id.txt_mysquad);
+        btn_predict = view.findViewById(R.id.btn_predict);
 
 
     }
 
     private void updateLabel(String stadiumName) {
+
+        final LottieDialog lottieDialog = new LottieDialog(getContext());
+        lottieDialog.show();
 
         String myFormat = "yyyy-MM-dd"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat);
@@ -364,7 +493,10 @@ public class Fragment_Predict extends Fragment {
         weatherCondition.getCityWeatherByName(checkstadium, fromatedate, new WeatherCondition.GetCityWeatherByNameResponseListener() {
             @Override
             public void onError(String message) {
+
                 Toast.makeText(getContext(), "something wrong", Toast.LENGTH_SHORT).show();
+
+                lottieDialog.dismiss();
             }
 
             @Override
@@ -374,6 +506,8 @@ public class Fragment_Predict extends Fragment {
 
                 txtLay_pitch.setVisibility(View.VISIBLE);
                 selectpitch(weatherCondition);
+
+                lottieDialog.dismiss();
             }
         });
 
@@ -391,6 +525,8 @@ public class Fragment_Predict extends Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
                 getBestPlayer(autoCompletetxtpitch.getText().toString(), condition);
+
+                btn_predict.setVisibility(View.VISIBLE);
             }
         });
 

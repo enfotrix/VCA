@@ -8,21 +8,37 @@
     android:orientation="vertical"
     tools:context=".Fragment.Fragment_Predict">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:gravity="center"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
             android:fontFamily="@font/happy_monkey"
             android:text="Predict Best 11"
             android:textColor="@color/black"
             android:textSize="@dimen/_14ssp" />
 
-    </LinearLayout>
+        <TextView
+            android:id="@+id/txt_mysquad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginHorizontal="@dimen/_12sdp"
+            android:background="@drawable/mysquadbg"
+            android:fontFamily="@font/roboto"
+            android:paddingHorizontal="@dimen/_5sdp"
+            android:paddingVertical="@dimen/_4sdp"
+            android:text="My Squad"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_14ssp" />
+
+    </RelativeLayout>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -31,7 +47,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/_12sdp">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/txtLay_team"
@@ -51,7 +68,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:enabled="false"
-                    android:inputType="none" />
+                    android:inputType="none"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sdp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -73,7 +92,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:enabled="false"
-                    android:inputType="none" />
+                    android:inputType="none"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sdp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -96,7 +117,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:enabled="false"
-                    android:inputType="none" />
+                    android:inputType="none"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sdp" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -138,6 +161,7 @@
                         android:layout_margin="7pt"
                         android:layout_weight="1"
                         android:gravity="center_vertical"
+                        android:textColor="@color/black"
                         android:textSize="15sp"
                         android:textStyle="bold" />
 
@@ -182,9 +206,25 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:enabled="false"
-                    android:inputType="none" />
+                    android:inputType="none"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12ssp" />
 
             </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_predict"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/_15sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginRight="@dimen/_15sdp"
+                android:layout_marginBottom="@dimen/_8sdp"
+                android:background="@drawable/btn_bg"
+                android:text="Predict"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_14ssp"
+                android:visibility="gone" />
 
         </LinearLayout>
 

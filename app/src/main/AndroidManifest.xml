@@ -6,25 +6,32 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/appicon"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.VCA">
-        <activity android:name=".Activities.ActivityUpdatePassword"></activity>
+        <activity
+            android:name=".Activities.ActivityEditProfile"
+            android:exported="true" />
+        <activity
+            android:name=".Activities.ActivityPredictedPlayer"
+            android:exported="true" />
+        <activity
+            android:name=".Activities.ActivityMySquad"
+            android:exported="true" />
+        <activity android:name=".Activities.ActivityUpdatePassword" />
         <activity android:name=".Activities.ActivityForgetPassword" />
         <activity android:name=".Activities.ActivityOtp" />
-        <activity android:name=".Activities.ActivityLogin">
-
-        </activity>
-        <activity android:name=".Activities.ActivitySplash" />
-        <activity android:name=".Activities.MainActivity">
+        <activity android:name=".Activities.ActivityLogin"></activity>
+        <activity android:name=".Activities.ActivitySplash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Activities.MainActivity" />
 
         <meta-data
             android:name="preloaded_fonts"

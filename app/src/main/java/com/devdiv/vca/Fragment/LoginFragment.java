@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 
 import com.devdiv.vca.Activities.ActivityForgetPassword;
 import com.devdiv.vca.Activities.MainActivity;
+import com.devdiv.vca.LottieDialog;
 import com.devdiv.vca.R;
 import com.devdiv.vca.Utils;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -72,6 +73,10 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                 if (!validateUserEmail() || !validateUserPassword()) {
                     return;
                 } else {
+
+                    final LottieDialog lottieDialog = new LottieDialog(getContext());
+                    lottieDialog.show();
+
                     String u_p = edt_password_lay.getEditText().getText().toString().trim();
                     String u_EML = edt_email_lay.getEditText().getText().toString().trim();
 
@@ -90,12 +95,15 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                                                     intent.putExtra("documentID", document.getId());
                                                     startActivity(intent);
                                                     getActivity().finish();
+
+                                                    lottieDialog.dismiss();
                                                 } else
                                                     edt_password_lay.setError("Please Enter Correct Password");
-
+                                                lottieDialog.dismiss();
                                             }
                                         } else
                                             edt_email_lay.setError("Please Enter Correct Email");
+                                        lottieDialog.dismiss();
                                     }
                                 }
                             });
