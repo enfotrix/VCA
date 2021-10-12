@@ -47,6 +47,14 @@ public class ActivityPredictedPlayer extends AppCompatActivity {
             }
         });
 
+
+        String w=getIntent().getStringExtra("weather");
+        String p=getIntent().getStringExtra("pitch");
+
+
+
+
+
     }
 
 

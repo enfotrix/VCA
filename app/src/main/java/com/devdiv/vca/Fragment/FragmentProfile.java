@@ -25,6 +25,7 @@ import com.devdiv.vca.Activities.ActivityLogin;
 import com.devdiv.vca.LottieDialog;
 import com.devdiv.vca.R;
 import com.devdiv.vca.Utils;
+import com.devdiv.vca.predictor;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -53,6 +54,7 @@ public class FragmentProfile extends Fragment {
     private FirebaseFirestore db;
     private Utils utils;
 
+
     private ImageView imageprofile;
 
     private final int PICK_IMAGE_REQUEST = 71;
@@ -78,6 +80,8 @@ public class FragmentProfile extends Fragment {
         storageReference = storage.getReference();
         db = FirebaseFirestore.getInstance();
         utils = new Utils(getContext());
+
+
 
         ///////////////////// getTeacherprofile ///////////////
         getData();

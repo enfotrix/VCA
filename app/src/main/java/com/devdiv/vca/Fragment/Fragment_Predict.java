@@ -51,7 +51,7 @@ public class Fragment_Predict extends Fragment {
     Button btn_get;
     TextInputLayout txtLay_country, txtLay_stadium, txtLay_pitch;
     AutoCompleteTextView autoCompletetxtcountry, autoCompletetxtStadium,
-            autoCompletetxtpitch, autoCompletetxtteam;
+            autoCompletetxtpitch, autoCompletetxtteam,autoCompletetxtweather;
     ArrayList<String> stadium;
     TextView tvSelectedDate, datee, txt_weatherResult, txt_mysquad;
     ImageView imgCalender;
@@ -80,7 +80,12 @@ public class Fragment_Predict extends Fragment {
         btn_predict.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getContext(), ActivityPredictedPlayer.class));
+
+
+                Intent intent = new Intent(getContext(), ActivityPredictedPlayer.class);
+                intent.putExtra("weather", autoCompletetxtweather.getText().toString());
+                intent.putExtra("pitch", autoCompletetxtpitch.getText().toString());
+                startActivity(intent);
             }
         });
 
@@ -92,6 +97,19 @@ public class Fragment_Predict extends Fragment {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getContext(), ActivityMySquad.class));
+            }
+        });
+
+
+        String[] weatherarray = {"warm", "cold", "cloud", "normal"};
+        ArrayAdapter arrayAdapter1 = new ArrayAdapter(getContext(), R.layout.dropdown_list, weatherarray);
+        autoCompletetxtweather.setAdapter(arrayAdapter1);
+
+        autoCompletetxtweather.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                Toast.makeText(getContext(), "Weather " + autoCompletetxtweather.getText().toString(), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -515,7 +533,7 @@ public class Fragment_Predict extends Fragment {
 
     private void selectpitch(String condition) {
 
-        String[] pitches = {"Green Pitch", "Dusty Pitch", "Dead Pitch"};
+        String[] pitches = {"dusty", "green", "seam" , "normal"};
 
         ArrayAdapter arrayAdapter = new ArrayAdapter(getContext(), R.layout.dropdown_list, pitches);
         autoCompletetxtpitch.setAdapter(arrayAdapter);

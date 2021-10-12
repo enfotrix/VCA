@@ -12,6 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.VCA">
         <activity
+            android:name=".Activities.TestActivity"
+            android:exported="true" >
+
+
+
+        </activity>
+        <activity
             android:name=".Activities.ActivityEditProfile"
             android:exported="true" />
         <activity
@@ -23,15 +30,19 @@
         <activity android:name=".Activities.ActivityUpdatePassword" />
         <activity android:name=".Activities.ActivityForgetPassword" />
         <activity android:name=".Activities.ActivityOtp" />
-        <activity android:name=".Activities.ActivityLogin"></activity>
+        <activity android:name=".Activities.ActivityLogin" />
         <activity android:name=".Activities.ActivitySplash">
+
+        </activity>
+        <activity android:name=".Activities.MainActivity" >
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
-        <activity android:name=".Activities.MainActivity" />
 
         <meta-data
             android:name="preloaded_fonts"

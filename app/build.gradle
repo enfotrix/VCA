@@ -7,6 +7,11 @@ android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
 
+
+    task wrapper(type: Wrapper){
+        gradleVersion = '7.2'
+    }
+
     defaultConfig {
         applicationId "com.devdiv.vca"
         minSdkVersion 21
