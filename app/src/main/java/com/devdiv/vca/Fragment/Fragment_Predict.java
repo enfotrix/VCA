@@ -441,6 +441,7 @@ public class Fragment_Predict extends Fragment {
         autoCompletetxtpitch = view.findViewById(R.id.autoCompletetxtpitch);
         txtLay_pitch = view.findViewById(R.id.txtLay_pitch);
         autoCompletetxtteam = view.findViewById(R.id.autoCompletetxtteam);
+        autoCompletetxtweather = view.findViewById(R.id.autoCompletetxttweather);
         txt_mysquad = view.findViewById(R.id.txt_mysquad);
         btn_predict = view.findViewById(R.id.btn_predict);
 

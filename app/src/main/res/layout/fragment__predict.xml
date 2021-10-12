@@ -51,7 +51,7 @@
             android:paddingHorizontal="@dimen/_12sdp">
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/txtLay_weather"
+                android:id="@+id/txtLayy_weather"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -64,7 +64,7 @@
                 app:startIconTint="@color/green">
 
                 <AutoCompleteTextView
-                    android:id="@+id/autoCompletetxtweather"
+                    android:id="@+id/autoCompletetxttweather"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:enabled="false"

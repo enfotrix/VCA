@@ -31,6 +31,7 @@ public class ActivityEditProfile extends AppCompatActivity {
     private Utils utils;
     TextInputEditText edtt_reg, oldpass;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +45,7 @@ public class ActivityEditProfile extends AppCompatActivity {
 
         db = FirebaseFirestore.getInstance();
         utils = new Utils(this);
+
 
         btn_edit.setOnClickListener(new View.OnClickListener() {
             @Override
