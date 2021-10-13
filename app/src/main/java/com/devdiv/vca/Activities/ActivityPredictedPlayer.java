@@ -99,7 +99,7 @@ public class ActivityPredictedPlayer extends AppCompatActivity {
                 spn+""+
                 bwl, Toast.LENGTH_SHORT).show();
 
-        inputStream = getResources().openRawResource(R.raw.t20_data_);
+        inputStream = getResources().openRawResource(R.raw.t20_data_final);
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
 
         try {
