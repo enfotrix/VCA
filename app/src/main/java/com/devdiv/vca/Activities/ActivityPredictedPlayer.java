@@ -1,7 +1,9 @@
 package com.devdiv.vca.Activities;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -10,17 +12,31 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.devdiv.vca.Adapters.Adapter_PredictedPlayer;
 import com.devdiv.vca.LottieDialog;
+import com.devdiv.vca.Model.Model_Player;
 import com.devdiv.vca.Model.Model_PredictedPlayer;
 import com.devdiv.vca.R;
+import com.devdiv.vca.predictor;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public class ActivityPredictedPlayer extends AppCompatActivity {
 
+    private com.devdiv.vca.predictor predic;
+
     ArrayList<Model_PredictedPlayer> modelPredictedPlayerArrayList = new ArrayList<>();
+    ArrayList<Model_Player> list_Player = new ArrayList<>();
+    ArrayList<Model_Player> list_PXI = new ArrayList<>();
     RecyclerView recyc_predictedplayer;
     Adapter_PredictedPlayer adapterPredictedPlayer;
     TextView txt_totalsquad;
+
+
+    InputStream inputStream;
+
+    String[] data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,22 +52,111 @@ public class ActivityPredictedPlayer extends AppCompatActivity {
         recyc_predictedplayer.setHasFixedSize(true);
         recyc_predictedplayer.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
 
-        getmysquad();
+        //getmysquad();
 
         final SwipeRefreshLayout pullToRefresh = findViewById(R.id.swiperefresh);
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                getmysquad();
+                //getmysquad();
                 pullToRefresh.setRefreshing(false);
             }
         });
 
 
-        String w=getIntent().getStringExtra("weather");
-        String p=getIntent().getStringExtra("pitch");
+        Toast.makeText(ActivityPredictedPlayer.this, ""+ getIntent().getStringExtra("weather"), Toast.LENGTH_SHORT).show();
+        predic= new predictor(
+                getIntent().getStringExtra("weather"),
+                getIntent().getStringExtra("pitch"),"","");
+        boolean check=predic.calculateXI();
+        if(check) {
+        /*    Toast.makeText(ActivityPredictedPlayer.this,
+                    predic.getnALL() + " " +
+                            predic.getnBAT() + " " +
+                            predic.getnSPN() + " " +
+                            predic.getnBWL()
 
 
+                    , Toast.LENGTH_SHORT).show();*/
+
+
+            getData(predic.getnALL(),
+                    predic.getnBAT(),
+                    predic.getnSPN(),
+                    predic.getnBWL());
+        }
+
+    }
+
+
+
+    private void getData(int all,int bat,int spn,int bwl){
+
+
+        Toast.makeText(ActivityPredictedPlayer.this,
+                all+" "+
+                bat+""+
+                spn+""+
+                bwl, Toast.LENGTH_SHORT).show();
+
+        inputStream = getResources().openRawResource(R.raw.t20_data_);
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+
+        try {
+
+            String csvfiel;
+            while ((csvfiel = bufferedReader.readLine()) != null) {
+
+                data = csvfiel.split(",");
+
+                /*Log.d("TAGgg", "onCreate: " + data[0] + "," + data[1]);
+                Toast.makeText(getApplicationContext(), "" + data[0] + "," + data[1]
+                                + "," + data[3]
+                                + "," + data[5]
+                                + "," + data[6]
+                                + "," + data[9]
+                                + "," + data[10]
+                                + "," + data[11]
+
+
+                        , Toast.LENGTH_SHORT).show();*/
+
+                //Toast.makeText(ActivityPredictedPlayer.this, data[2]+"", Toast.LENGTH_SHORT).show();
+
+                Model_Player tempPlayer=new Model_Player(
+                        data[1].toString(),data[2].toString());
+
+                if(all!=0 && tempPlayer.getCatg().equals("ALL")){
+
+                    list_PXI.add(tempPlayer);
+                    all--;
+                }
+                if(bat!=0 && tempPlayer.getCatg().equals("BAT")){
+                    list_PXI.add(tempPlayer);
+                    bat--;
+                }
+                if(spn!=0 && tempPlayer.getCatg().equals("SPN")){
+                    list_PXI.add(tempPlayer);
+                    spn--;
+                }
+                if(bwl!=0 && tempPlayer.getCatg().equals("BWL")){
+                    list_PXI.add(tempPlayer);
+                    bwl--;
+                }
+
+
+                adapterPredictedPlayer = new Adapter_PredictedPlayer(getApplicationContext(), list_PXI);
+                recyc_predictedplayer.setAdapter(adapterPredictedPlayer);
+                adapterPredictedPlayer.notifyDataSetChanged();
+
+
+
+            }
+
+        } catch (Exception e) {
+            Toast.makeText(getApplicationContext(), "" + e.getMessage(), Toast.LENGTH_SHORT).show();
+
+        }
 
 
 
@@ -59,7 +164,9 @@ public class ActivityPredictedPlayer extends AppCompatActivity {
 
 
 
-    private void getmysquad() {
+
+
+    /*private void getmysquad() {
 
         final LottieDialog lottieDialog = new LottieDialog(this);
         lottieDialog.show();
@@ -217,5 +324,5 @@ public class ActivityPredictedPlayer extends AppCompatActivity {
         lottieDialog.dismiss();
 
 
-    }
+    }*/
 }

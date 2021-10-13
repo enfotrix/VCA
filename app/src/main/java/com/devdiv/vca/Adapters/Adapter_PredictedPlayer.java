@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.devdiv.vca.Model.Model_Player;
 import com.devdiv.vca.Model.Model_PredictedPlayer;
 import com.devdiv.vca.R;
 
@@ -18,9 +19,9 @@ import java.util.ArrayList;
 public class Adapter_PredictedPlayer extends RecyclerView.Adapter<Adapter_PredictedPlayer.ViewHolder> {
 
     Context context;
-    ArrayList<Model_PredictedPlayer> modelPredictedPlayerArrayList;
+    ArrayList<Model_Player> modelPredictedPlayerArrayList;
 
-    public Adapter_PredictedPlayer(Context context, ArrayList<Model_PredictedPlayer> modelPredictedPlayerArrayList) {
+    public Adapter_PredictedPlayer(Context context, ArrayList<Model_Player> modelPredictedPlayerArrayList) {
 
         this.context = context;
         this.modelPredictedPlayerArrayList = modelPredictedPlayerArrayList;
@@ -38,18 +39,18 @@ public class Adapter_PredictedPlayer extends RecyclerView.Adapter<Adapter_Predic
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        final Model_PredictedPlayer model_mySquad = modelPredictedPlayerArrayList.get(position);
+        final Model_Player model_mySquad = modelPredictedPlayerArrayList.get(position);
 
-        holder.txt_century.setText(model_mySquad.getCentury());
-        holder.txt_highscore.setText(model_mySquad.getHighscore());
-        holder.txt_playerage.setText(model_mySquad.getPlayerage());
-        holder.txt_strikeRate.setText(model_mySquad.getStriekrate());
-        holder.txt_fifty.setText(model_mySquad.getFifyt());
-        holder.txt_playername.setText(model_mySquad.getPlayername());
-        holder.txt_matchplay.setText(model_mySquad.getMatchplay());
-        holder.txt_wickets.setText(model_mySquad.getWickets());
-        holder.txt_totalruns.setText(model_mySquad.getTotalruns());
-        holder.txt_avg.setText(model_mySquad.getEconomy());
+//        holder.txt_century.setText(model_mySquad.getCentury());
+//        holder.txt_highscore.setText(model_mySquad.getHighscore());
+//        holder.txt_playerage.setText(model_mySquad.getPlayerage());
+//        holder.txt_strikeRate.setText(model_mySquad.getStriekrate());
+//        holder.txt_fifty.setText(model_mySquad.getFifyt());
+        holder.txt_playername.setText(model_mySquad.getName());
+//        holder.txt_matchplay.setText(model_mySquad.getMatchplay());
+//        holder.txt_wickets.setText(model_mySquad.getWickets());
+//        holder.txt_totalruns.setText(model_mySquad.getTotalruns());
+//        holder.txt_avg.setText(model_mySquad.getEconomy());
 
     }
 

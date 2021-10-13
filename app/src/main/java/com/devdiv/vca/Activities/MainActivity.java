@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
         getSupportActionBar().hide();
 
-        inputStream = getResources().openRawResource(R.raw.t20_data);
+        inputStream = getResources().openRawResource(R.raw.t20_data_);
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
 
         try {
@@ -48,8 +48,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
                 data = csvfiel.split(",");
 
-                Log.d("TAGgg", "onCreate: " + data[0] + "," + data[1]);
-                Toast.makeText(getApplicationContext(), "" + data[0] + "," + data[1]
+               // Log.d("TAGgg", "onCreate: " + data[0] + "," + data[1]);
+                /*Toast.makeText(getApplicationContext(), "" + data[0] + "," + data[1]
                                 + "," + data[3]
                                 + "," + data[5]
                                 + "," + data[6]
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                                 + "," + data[11]
                                 
 
-                        , Toast.LENGTH_SHORT).show();
+                        , Toast.LENGTH_SHORT).show();*/
 
             }
 
